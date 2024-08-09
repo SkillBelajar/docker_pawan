@@ -1,43 +1,23 @@
-# Use the official Ubuntu image as the base
-FROM ubuntu:latest
+# Use the official Ubuntu 20.04 image as the base
+FROM ubuntu:20.04
 
-# Update the package lists
-RUN apt-get update && apt-get upgrade -y
-
-RUN apt-get install -y software-properties-common
-
-
-# Install Apache2
-RUN apt-get install -y apache2
-
-# Install PHP 7.4 and required extensions
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ondrej/php
-RUN apt-get update
-RUN apt-get install -y php7.4 php7.4-cli php7.4-json php7.4-common php7.4-mysql php7.4-zip php7.4-gd php7.4-mbstring php7.4-curl php7.4-xml php7.4-bcmath
-
-
-#Install SSH Server
-RUN apt install  openssh-server sudo -y
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 test 
-RUN echo 'test:test' | chpasswd
-RUN service ssh start
-
-RUN apt-get install nano
-RUN apt-get install git -y
-
-
+# Update the package lists and install necessary packages
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:ondrej/php && \
+    apt-get update && \
+    apt-get install -y php7.4 php7.4-cli php7.4-json php7.4-common php7.4-mysql php7.4-zip php7.4-gd php7.4-mbstring php7.4-curl php7.4-xml php7.4-bcmath && \
+    apt-get install -y nano git && \
+    apt-get install -y openssh-server sudo && \
+    useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 test && \
+    passwd -d test && \
+    service ssh start
 
 # Set the default Apache document root
-WORKDIR /var/www/html
+WORKDIR /var/www/html/public
 
 # Expose port 80 for Apache
-EXPOSE 80 22
+EXPOSE 80
 
-# Start Apache
-
-CMD ["apachectl", "-D", "FOREGROUND"]["/usr/sbin/sshd","-D"]
-
-
-
-
+# Start Apache and SSH
+CMD ["apachectl", "-D", "FOREGROUND", "&&", "/usr/sbin/sshd", "-D"]
