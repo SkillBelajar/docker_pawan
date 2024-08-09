@@ -5,3 +5,4 @@ sudo docker build -t coba2 .
 
 
 2. Jalankan DOcker Compose
+docker-compose up -d
