@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   web:
-    image: my-apache-php
+    image: coba3
     ports:
       - "81:80"
     volumes:

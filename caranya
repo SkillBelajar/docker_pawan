@@ -1,0 +1,7 @@
+1. Buat Image dulu
+
+sudo docker build -t coba2 .
+
+
+
+2. Jalankan DOcker Compose

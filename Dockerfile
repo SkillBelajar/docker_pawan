@@ -18,12 +18,26 @@ RUN apt-get install -y php7.4 php7.4-cli php7.4-json php7.4-common php7.4-mysql 
 
 
 #Install SSH Server
+RUN apt install  openssh-server sudo -y
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 test 
+RUN echo 'test:test' | chpasswd
+RUN service ssh start
+
+RUN apt-get install nano
+RUN apt-get install git -y
+
+
 
 # Set the default Apache document root
 WORKDIR /var/www/html
 
 # Expose port 80 for Apache
 EXPOSE 80
+EXPOSE 22
 
 # Start Apache
 CMD ["apachectl", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/sshd","-D"]
+
+
+
