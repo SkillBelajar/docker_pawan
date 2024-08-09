@@ -1,8 +1,13 @@
 1. Buat Image dulu
 
-sudo docker build -t coba2 .
+sudo docker build -t coba3 .
 
 
 
 2. Jalankan DOcker Compose
 docker-compose up -d
+
+Bisa juga dengan docker run all port random
+
+
+

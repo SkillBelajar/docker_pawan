@@ -32,12 +32,12 @@ RUN apt-get install git -y
 WORKDIR /var/www/html
 
 # Expose port 80 for Apache
-EXPOSE 80
-EXPOSE 22
+EXPOSE 80 22
 
 # Start Apache
-CMD ["apachectl", "-D", "FOREGROUND"]
-CMD ["/usr/sbin/sshd","-D"]
+
+CMD ["apachectl", "-D", "FOREGROUND"]["/usr/sbin/sshd","-D"]
+
 
 
 
