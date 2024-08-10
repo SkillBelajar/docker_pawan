@@ -3,6 +3,7 @@ FROM ubuntu:20.04
 
 # Update the package lists and install necessary packages
 RUN apt-get update && apt-get upgrade -y && \
+    apt-get install apache2 -y && \
     apt-get install -y software-properties-common && \
     add-apt-repository ppa:ondrej/php && \
     apt-get update && \
@@ -14,10 +15,10 @@ RUN apt-get update && apt-get upgrade -y && \
     service ssh start
 
 # Set the default Apache document root
-WORKDIR /var/www/html/public
+WORKDIR /var/www/html
 
 # Expose port 80 for Apache
-EXPOSE 80
+EXPOSE 80 22
 
 # Start Apache and SSH
 CMD ["apachectl", "-D", "FOREGROUND", "&&", "/usr/sbin/sshd", "-D"]
