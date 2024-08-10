@@ -28,13 +28,21 @@ RUN apt-get install git -y
 
 
 
+# Configure Apache2 to use PHP 7.4
+RUN a2enmod rewrite && \
+    a2enmod php7.4 && \
+    service apache2 restart
+
+
+
 # Set the default Apache document root
 WORKDIR /var/www/html
 
 # Expose port 80 for Apache
 EXPOSE 80 22
 
+RUN /etc/init.d/apache2 start
 
 
 # Start Apache and SSH
-CMD ["apachectl", "-D", "FOREGROUND", "&&", "/usr/sbin/sshd", "-D"]
+CMD ["bash", "-c", "apachectl -D FOREGROUND & /usr/sbin/sshd -D"]
