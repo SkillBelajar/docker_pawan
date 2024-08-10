@@ -4,6 +4,8 @@ FROM ubuntu:latest
 # Update the package lists
 
 RUN apt-get update && apt-get upgrade -y
+RUN apt-get install curl -y
+RUN apt-get install wget -y
 
 RUN apt-get install  software-properties-common -y
 
@@ -50,10 +52,14 @@ RUN composer --version
 WORKDIR /var/www/html
 
 # Expose port 80 for Apache
-EXPOSE 80 22
 
-RUN /etc/init.d/apache2 start
 
+#RUN /etc/init.d/apache2 start
+
+
+WORKDIR /app
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Start Apache and SSH
-CMD ["bash", "-c", "apachectl -D FOREGROUND & /usr/sbin/sshd -D"]
+EXPOSE 80 22 8080
+CMD ["bash", "-c", "apachectl -D FOREGROUND & /usr/sbin/sshd -D & code-server --bind-addr 0.0.0.0:8080"]

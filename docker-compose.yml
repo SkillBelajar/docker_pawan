@@ -4,8 +4,9 @@ services:
   web:
     image: coba3
     ports:
-      - "81:80"
-      - "23:22"
+      - "81:80" #apache2
+      - "23:22" #ssh
+      - "8081:8080" #code Server Vscode
     volumes:
       - ./app:/var/www/html
     restart: unless-stopped
