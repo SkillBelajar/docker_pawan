@@ -1,5 +1,5 @@
 # Use the official Ubuntu image as the base
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # Update the package lists
 RUN apt-get update && apt-get upgrade -y
