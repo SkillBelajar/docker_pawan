@@ -10,3 +10,7 @@ services:
     volumes:
       - ./app:/var/www/html
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5' # Hard limit

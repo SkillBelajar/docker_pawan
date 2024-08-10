@@ -1,5 +1,5 @@
 # Use the official Ubuntu image as the base
-FROM ubuntu:22.04
+FROM ubuntu:latest
 
 # Update the package lists
 
@@ -26,8 +26,8 @@ RUN apt-get install -y php7.4 php7.4-cli php7.4-json php7.4-common php7.4-mysql 
 
 #Install SSH Server
 RUN apt install  openssh-server sudo -y
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 test 
-RUN echo 'test:test' | chpasswd
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 admin
+RUN echo 'admin:tik' | chpasswd
 RUN service ssh start
 
 RUN apt-get install nano
