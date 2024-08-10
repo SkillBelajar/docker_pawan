@@ -1,8 +1,8 @@
 # Use the official Ubuntu image as the base
-FROM ubuntu:22.04
+FROM ubuntu:latest
 
 # Update the package lists
-ENV TZ="Asia/Jakarta"
+
 RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install  software-properties-common -y
@@ -17,7 +17,7 @@ RUN add-apt-repository ppa:ondrej/php
 RUN apt-get update
 
 RUN apt-get install -y php7.4 php7.4-cli php7.4-json php7.4-common php7.4-mysql php7.4-zip php7.4-gd php7.4-mbstring php7.4-curl php7.4-xml php7.4-bcmath
-RUN echo "6" 
+
 
 #Install SSH Server
 RUN apt install  openssh-server sudo -y

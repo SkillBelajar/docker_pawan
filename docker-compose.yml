@@ -8,3 +8,4 @@ services:
       - "23:22"
     volumes:
       - ./app:/var/www/html
+    restart: unless-stopped
