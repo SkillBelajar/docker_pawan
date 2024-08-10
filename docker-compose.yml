@@ -5,6 +5,6 @@ services:
     image: coba3
     ports:
       - "81:80"
-      - "23:21"
+      - "23:22"
     volumes:
       - ./app:/var/www/html
