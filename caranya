@@ -8,6 +8,6 @@ sudo docker build -t coba3 .
 docker-compose up -d
 
 Bisa juga dengan docker run all port random
-
+x
 
 
