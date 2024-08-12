@@ -2,6 +2,11 @@ version: '3.7'
 
 services:
   web:
-    image: pawan_docker2
+    image: cobax
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.9' # Hard limit
     environment:
-      - CONTOH=999
+      - CONTOH=99
