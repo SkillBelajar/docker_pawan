@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  web:
+    image: pawan_docker2
+    environment:
+      - CONTOH=999
