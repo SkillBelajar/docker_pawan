@@ -62,3 +62,7 @@ WORKDIR /var/www/html
 # Start Apache and SSH
 EXPOSE 80 22 8080
 CMD ["bash", "-c", "apachectl -D FOREGROUND & /usr/sbin/sshd -D & code-server --bind-addr 0.0.0.0:8080"]
+
+
+#sudo docker build -t php82  .
+#docker-compose up -d
