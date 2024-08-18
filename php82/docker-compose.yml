@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: php82
+    image: php82
+    ports:
+      - "86:80" # apache2
+      - "26:22" # ssh
+      - "8086:8080" # code Server Vscode
+    volumes:
+      - ./app:/var/www/html
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '3' # Menggunakan 3 CPU Core
+    networks:
+      - php82
+
+  couchdb:
+    container_name: couch6
+    image: couchdb
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=tik
+    volumes:
+      - data_couch3:/opt/couchdb/data
+    ports:
+      - "5986:5984"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '3' # Hard limit
+    networks:
+      - php82
+
+volumes:
+  data_couch3:
+
+
+networks:
+  php82:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.33.0.0/16
